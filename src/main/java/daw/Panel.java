@@ -79,8 +79,8 @@ public class Panel extends JPanel implements ItemListener{
                 if (!tfUrl.getText().isEmpty()&&!tfFichero.getText().isEmpty()){
                     // Genera el fichero con la imagen del QR
                     // El fichero se genera en la raíz del proyecto
-                    QR.escribirQR(tfUrl.getText(), tfFichero.getText()+extension, extension);
-                    new VentanaResultado(tfFichero.getText());
+                    QR.escribirQR(tfUrl.getText(), tfFichero.getText()+"."+extension, extension);
+                    new VentanaResultado(tfFichero.getText()+"."+extension);
                 } else {
                     JOptionPane.showMessageDialog(null, "No puede haber campos vacíos.");
                 }
@@ -109,13 +109,8 @@ public class Panel extends JPanel implements ItemListener{
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
-        
+    public void itemStateChanged(ItemEvent e) {        
             extension=comboExtension.getSelectedItem().toString();
-            System.out.println(extension);
-        
-        
-        
     }
 
 }
