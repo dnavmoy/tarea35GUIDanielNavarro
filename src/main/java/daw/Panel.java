@@ -11,11 +11,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -34,6 +37,7 @@ public class Panel extends JPanel implements ItemListener{
     private JTextField tfUrl, tfFichero;
     private String nombreFichero,extension;
     private JComboBox comboExtension;
+    private JRadioButton botonJPG,botonPNG;
     
 
     // Constructor 
@@ -79,6 +83,13 @@ public class Panel extends JPanel implements ItemListener{
                 if (!tfUrl.getText().isEmpty()&&!tfFichero.getText().isEmpty()){
                     // Genera el fichero con la imagen del QR
                     // El fichero se genera en la raíz del proyecto
+                    
+                    if(botonJPG.isSelected()){
+                        extension="jpg";
+                    }
+                    if(botonPNG.isSelected()){
+                        extension="png";
+                    }
                     QR.escribirQR(tfUrl.getText(), tfFichero.getText()+"."+extension, extension);
                     new VentanaResultado(tfFichero.getText()+"."+extension);
                 } else {
@@ -96,16 +107,27 @@ public class Panel extends JPanel implements ItemListener{
                 System.exit(0);
             }
         });
+//        extension="jpg";
+//        //jcombo para 
+//         lblExt = new JLabel("Extension del Fichero: ");
+//        this.add(lblExt);
         
-         lblExt = new JLabel("Extension del Fichero: ");
-        this.add(lblExt);
+//        comboExtension = new JComboBox();
+//        this.add(comboExtension);
+//        comboExtension.addItem("jpg");
+//        comboExtension.addItem("png");
+//        comboExtension.addItemListener(this);
         
-        comboExtension = new JComboBox();
-        this.add(comboExtension);
-        comboExtension.addItem("jpg");
-        comboExtension.addItem("png");
-        comboExtension.addItemListener(this);
-        
+            ButtonGroup g = new ButtonGroup();
+            
+            botonJPG=new JRadioButton("JPG");
+            botonPNG=new JRadioButton("PNG");
+            g.add(botonJPG);
+            g.add(botonPNG);
+            this.add(botonJPG);
+            this.add(botonPNG);
+            botonJPG.setSelected(true);
+
     }
 
     @Override
